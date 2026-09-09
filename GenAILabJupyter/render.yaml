@@ -1,0 +1,15 @@
+# Render blueprint — push this folder to a repo, then Render → New → Blueprint.
+services:
+  - type: web
+    name: genai-rag-lab
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter            # needs >= 1 GB RAM; "free" (512 MB) is too small
+    envVars:
+      - key: SANDBOX_MODE
+        value: mock
+      - key: JUPYTER_TOKEN
+        generateValue: true   # Render generates a random token; read it in the dashboard
+      - key: CULL_IDLE
+        value: "3600"
+    healthCheckPath: /api

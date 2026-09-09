@@ -1,0 +1,13 @@
+# Local / VM run:  docker compose up --build   ->  http://localhost:8888
+services:
+  lab:
+    build: .
+    ports:
+      - "8888:8888"
+    environment:
+      SANDBOX_MODE: mock
+      JUPYTER_TOKEN: "changeme"        # open http://localhost:8888/lab?token=changeme
+      # OPENAI_API_KEY: "sk-..."        # optional: then set SANDBOX_MODE=openai in the notebook
+      CULL_IDLE: "3600"
+    volumes:
+      - ./work:/home/learner/work      # persist the learner's notebooks between restarts
